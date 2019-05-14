@@ -10,7 +10,7 @@ bin/test_turtal: test/test_turtal.cpp | bin
 
 bin/test_turtal: \
     include/turtal/Clock.hpp \
-    include/turtal/Duration.hpp \
+    include/turtal/Time_Difference.hpp \
     include/turtal/Time_Point.hpp \
 
 clean:
