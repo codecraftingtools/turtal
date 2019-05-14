@@ -10,7 +10,12 @@ namespace turtal {
 class Clock {
 public:
     Clock(int id) : id_(id) {}
-
+    Clock(Clock&&) = delete;
+    Clock& operator=(Clock&&) = delete;
+    Clock(const Clock&) = delete;
+    Clock& operator=(const Clock&) = delete;
+    ~Clock() {};
+  
     int id() const {return id_;}
     int64_t time_offset_ns() const {return time_offset_ns_;}
     double time_scale_factor() const {return time_scale_factor_;}

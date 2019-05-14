@@ -10,6 +10,17 @@ namespace turtal {
 class Time_Point {
 public:
     Time_Point(const Clock &clock = clock::System) : clock_ptr_(&clock) {}
+    Time_Point(Time_Point&&) = delete;
+    Time_Point& operator=(Time_Point&&) = delete;
+    Time_Point(const Time_Point& r) {
+        time_ns_ = r.time_ns_;
+        clock_ptr_ = r.clock_ptr_;
+    }
+    Time_Point& operator=(const Time_Point& r) {
+        time_ns_ = r.time_ns_;
+        clock_ptr_ = r.clock_ptr_;
+    }
+    ~Time_Point() {};
 
     const Clock &clock() const {return *clock_ptr_;}
 
