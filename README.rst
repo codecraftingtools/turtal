@@ -1,4 +1,4 @@
-Tirtal
+Turtal
 ======
 
-The Indispensable Real-Time Abstraction Layer.
+The Underlying Real-Time Abstraction Layer.
