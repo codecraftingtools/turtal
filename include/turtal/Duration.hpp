@@ -9,13 +9,13 @@ namespace turtal {
 
 class Duration {
 public:
-    Duration(const Clock &clock = clock::System) : clock_(clock) {}
+    Duration(const Clock &clock = clock::System) : clock_ptr_(&clock) {}
 
-    const Clock &clock() const {return clock_;}
+    const Clock &clock() const {return *clock_ptr_;}
   
 private:
-    uint64_t dt_ns_{0};
-    const Clock &clock_;
+    int64_t dt_ns_{0};
+    const Clock *clock_ptr_;
 };
 
 } // namespace turtal

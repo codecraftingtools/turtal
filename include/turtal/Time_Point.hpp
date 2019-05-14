@@ -9,13 +9,13 @@ namespace turtal {
 
 class Time_Point {
 public:
-    Time_Point(const Clock &clock = clock::System) : clock_(clock) {}
+    Time_Point(const Clock &clock = clock::System) : clock_ptr_(&clock) {}
 
-    const Clock &clock() const {return clock_;}
+    const Clock &clock() const {return *clock_ptr_;}
 
 private:
     uint64_t time_ns_{0};
-    const Clock &clock_;
+    const Clock *clock_ptr_;
 };
 
 } // namespace turtal
