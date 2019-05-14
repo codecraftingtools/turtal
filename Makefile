@@ -9,7 +9,8 @@ bin/test_turtal: test/test_turtal.cpp | bin
 	g++ -o $@ -I include $<
 
 bin/test_turtal: \
-    include/turtal/Clock.hpp \
+    include/turtal/clock.hpp \
+    include/turtal/Clock_Parameters.hpp \
     include/turtal/Time_Difference.hpp \
     include/turtal/Time_Point.hpp \
 

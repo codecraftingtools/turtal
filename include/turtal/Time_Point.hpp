@@ -3,30 +3,31 @@
 #ifndef TURTAL_TIME_POINT_HPP
 #define TURTAL_TIME_POINT_HPP
 
-#include <turtal/Clock.hpp>
+#include <turtal/clock.hpp>
+#include <cstdint>
+#include <math.h>
 
 namespace turtal {
 
+template<turtal::Clock_ID N>
 class Time_Point {
 public:
-    Time_Point(const Clock &clock = clock::System) : clock_ptr_(&clock) {}
-    Time_Point(Time_Point&&) = delete;
-    Time_Point& operator=(Time_Point&&) = delete;
-    Time_Point(const Time_Point& r) {
-        time_ns_ = r.time_ns_;
-        clock_ptr_ = r.clock_ptr_;
-    }
-    Time_Point& operator=(const Time_Point& r) {
-        time_ns_ = r.time_ns_;
-        clock_ptr_ = r.clock_ptr_;
-    }
-    ~Time_Point() {};
+    int64_t nanoseconds() {return nanoseconds_;}
+    double seconds() {return nanoseconds_*1e-9;}
 
-    const Clock &clock() const {return *clock_ptr_;}
+    static Time_Point from_nanoseconds(uint64_t ns) {
+        Time_Point t;
+        t.nanoseconds_ = ns;
+    }
+    static Time_Point from_seconds(double s) {
+        Time_Point t;
+        t.nanoseconds_ = round(s*1e9);
+    }
+
+    static const turtal::Clock_ID Clock_ID{N};
 
 private:
-    uint64_t time_ns_{0};
-    const Clock *clock_ptr_;
+    uint64_t nanoseconds_{0};
 };
 
 } // namespace turtal
