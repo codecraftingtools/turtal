@@ -3,15 +3,21 @@
 #ifndef TURTAL_CLOCK_HPP
 #define TURTAL_CLOCK_HPP
 
-namespace turtal {
+#include <turtal/Clock_Parameters.hpp>
 
-typedef int Clock_ID;
-  
-namespace clock {
-  const Clock_ID Unspecified{-1};
-  const Clock_ID System{0};
-};
+namespace turtal { namespace clock {
 
-} // namespace turtal
+Clock_Parameters System_Clock_{0, "System"};
+Clock_Parameters Unspecified_Clock_{Clock_Parameters::max_clocks(), "Unspecified"};
+
+const Clock_ID System{System_Clock_.id()};
+const Clock_ID Unspecified{Unspecified_Clock_.id()};
+
+inline Clock_Parameters& get_parameters_for(Clock_ID id)
+{
+    return Clock_Parameters::get_for(id);
+}
+
+} } // namespace turtal::clock
 
 #endif // TURTAL_CLOCK_HPP

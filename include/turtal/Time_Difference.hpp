@@ -4,46 +4,58 @@
 #define TURTAL_TIME_DIFFERENCE_HPP
 
 #include <turtal/clock.hpp>
-#include <cstdint>
 #include <math.h>
+
+#include <iostream> // test
 
 namespace turtal {
 
-template<turtal::Clock_ID N>
 class Time_Difference {
-public:
-    Time_Difference() {};
-    Time_Difference(const Time_Difference<clock::Unspecified>& r) {
-        nanoseconds_ = r.nanoseconds_;
+  public:
+    Time_Difference(Clock_ID clock_id = clock::System) : clock_id_{clock_id} {}
+    Time_Difference(const Time_Difference& r) = default;
+    Time_Difference(Time_Difference&& r) = default;
+
+    Time_Difference& operator=(const Time_Difference& r) {
+
+        // test
+        std::cout << "equal " << clock_id_.value() << " " << r.clock_id_.value() << std::endl;
+
+        if (r.clock_id_ == clock::Unspecified || r.clock_id_ == clock_id_) {
+            nanoseconds_ = r.nanoseconds_;
+        } else if (r.clock_id_ == clock::System) {
+            //auto sf = clock::get_parameters_for(clock_id_);
+            nanoseconds_ = 88888;
+        } else {
+            nanoseconds_ = 99999;
+        }
+	    return *this;
     }
-    Time_Difference& operator=(const Time_Difference<clock::Unspecified>& r) {
-        nanoseconds_ = r.nanoseconds_;
-    }
+    Time_Difference& operator=(Time_Difference&& r) = default;
 
-    int64_t nanoseconds() {return nanoseconds_;}
-    double seconds() {return nanoseconds_*1e-9;}
+    Clock_ID clock_id() const {return clock_id_;}
+    int64_t nanoseconds() const {return nanoseconds_;}
+    double seconds() const {return nanoseconds_*1e-9;}
 
-    static const turtal::Clock_ID Clock_ID{N};
-
-public: // should be private
+  public:
+    Clock_ID clock_id_;
     int64_t nanoseconds_{0};
 };
 
-Time_Difference<clock::Unspecified> nanoseconds(int64_t ns) {
-    Time_Difference<clock::Unspecified> dt;
+Time_Difference nanoseconds(int64_t ns) {
+    Time_Difference dt{clock::Unspecified};
     dt.nanoseconds_ = ns;
     return dt;
 }
 
-Time_Difference<clock::Unspecified> seconds(double s) {
-    Time_Difference<clock::Unspecified> dt;
+Time_Difference seconds(double s) {
+    Time_Difference dt{clock::Unspecified};
     dt.nanoseconds_ = round(s*1e9);
     return dt;
 }
 
-template<turtal::Clock_ID N>
-using Duration = Time_Difference<N>;
-  
+using Duration = Time_Difference;
+
 } // namespace turtal
 
 #endif // TURTAL_TIME_DIFFERENCE_HPP
