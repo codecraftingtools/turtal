@@ -7,7 +7,8 @@ int main()
 {
     using namespace turtal;
     using namespace std;
-
+    using namespace turtal::time::units;
+        
     for (int i=0; i<clock::max_count() - 2; i++) {
         cout << "added clock " << clock::add() << endl;
     }
@@ -36,7 +37,7 @@ int main()
     cout << "dt3 " << dt3 << endl;
     dt = dt2;
     cout << "dt " << dt << endl;
-    dt2 = nanoseconds(10);
+    dt2 = nanoseconds(10, clock::System);
     cout << "dt2 " << dt2 << endl;
     dt2 = dt;
     cout << "dt2 " << dt2 << endl;

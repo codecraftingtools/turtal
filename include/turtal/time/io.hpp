@@ -9,7 +9,7 @@
 
 namespace turtal { namespace time {
 
-std::ostream& operator <<(std::ostream& os, const Difference& d)
+inline std::ostream& operator <<(std::ostream& os, const Difference& d)
 {
     os << "clock[" << d.clock_id() << "]: " << d.nanoseconds() << " ns";
     return os;

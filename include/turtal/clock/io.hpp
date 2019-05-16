@@ -8,13 +8,13 @@
 
 namespace turtal { namespace clock {
 
-std::ostream& operator <<(std::ostream& os, const ID& id)
+inline std::ostream& operator <<(std::ostream& os, const ID& id)
 {
     os << id.value();
     return os;
 } 
 
-std::ostream& operator <<(std::ostream& os, const Parameters& p)
+inline std::ostream& operator <<(std::ostream& os, const Parameters& p)
 {
     os << p.name() << ": "
        << "offset: " << p.time_offset_ns() << " ns, "

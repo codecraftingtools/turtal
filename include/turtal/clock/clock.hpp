@@ -30,13 +30,15 @@ inline ID add()
     return new_id;
 }
 
-inline Parameters& get_parameters_for(int i) {
+inline Parameters& get_parameters_for(int i)
+{
     if (i < 0 || i >= count_) {
         throw std::runtime_error("clock index out of bounds");
     }
     return clocks_[i];
 }
-inline Parameters& get_parameters_for(ID id) {
+inline Parameters& get_parameters_for(ID id)
+{
     return get_parameters_for(id.value());
 }
 
