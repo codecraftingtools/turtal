@@ -4,12 +4,12 @@
 Turtal
 ======
 
-The goal of this project is to define a run-time abstraction layer
-that isolates high-level code from the details related to a specific
-operating system, hardware, or message-passing framework
-implementation.  This library will eventually provide a set of uniform
-programming interfaces for constructs like message queues, threads,
-file input/output, timers, and schedulers.
+Turtal is the underlying run-time abstraction layer that isolates
+high-level code from the details related to a specific operating
+system, hardware, or message-passing framework implementation.  This
+library will eventually provide a set of uniform programming
+interfaces for constructs like message queues, threads, file
+input/output, timers, and schedulers.
 
 `Turtal`_ is part of the `Code Craftsmen`_ project.  The
 `documentation`_ is hosted on `Read the Docs`_ and the `source code`_
